@@ -10,7 +10,7 @@ const path = require('path');
 
 const app = express();
 
-// Body parser köztes szoftver a űrlapok beküldésének kezeléséhez
+// Body parser middleware az űrlapok beküldésének kezeléséhez
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Statikus fájlok kiszolgálása a 'public' könyvtárból
