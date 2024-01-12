@@ -7,7 +7,8 @@ const puppeteer = require('puppeteer');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-// Initialize the Express application
+// Inicializálás
+
 const app = express();
 
 // Body parser middleware to handle form submissions
