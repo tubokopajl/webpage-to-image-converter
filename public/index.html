@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <link rel="stylesheet"  href="style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web2Img</title>
+
+</head>
+<body>
+    <div class="header">
+        <h1>Web2Img</h1>
+    </div>
+    <div>
+        <form id="convertForm" action="/convert" method="post">
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url" placeholder="Adj meg egy URL-t">
+            <label for="html">Vagy HTML:</label>
+            <textarea id="html" name="html" rows="4" placeholder="Írd be a html kódot ide"></textarea>
+            <button type="submit">Convert</button>
+        </form>
+
+    </div>
+    
+</body>
+</html>
