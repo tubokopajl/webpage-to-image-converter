@@ -1,6 +1,5 @@
-
 // /mnt/data/app.js
-// Express.js Application for Webpage to Image Conversion
+// Express.js alkalmazás weboldalak képpé konvertálásához
 
 const express = require('express');
 const puppeteer = require('puppeteer');
@@ -11,34 +10,34 @@ const path = require('path');
 
 const app = express();
 
-// Body parser middleware to handle form submissions
+// Body parser köztes szoftver a űrlapok beküldésének kezeléséhez
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Serve static files from the 'public' directory
+// Statikus fájlok kiszolgálása a 'public' könyvtárból
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint for rendering the main page
+// Endpoint a főoldal megjelenítéséhez
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Endpoint for processing conversion requests
+// Endpoint a konverziós kérések feldolgozásához
 app.post('/convert', async (req, res) => {
     const { url, html } = req.body;
     try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        // If URL is provided, navigate to it, otherwise set HTML content
+        // Ha URL van megadva, navigáljon oda, különben állítsa be a HTML tartalmat
         if (url) {
             await page.goto(url);
         } else if (html) {
             await page.setContent(html);
         } else {
-            throw new Error('No URL or HTML content provided');
+            throw new Error('Nincs megadva URL vagy HTML tartalom');
         }
 
-        // Take a screenshot and send it as a response
+        // Képernyőkép készítése és válaszként küldése
         const imageBuffer = await page.screenshot({ fullPage: true });
         await browser.close();
         res.writeHead(200, {
@@ -47,10 +46,11 @@ app.post('/convert', async (req, res) => {
         });
         res.end(imageBuffer, 'binary');
     } catch (error) {
-        res.status(500).send(`Error during conversion: ${error.message}`);
+        res.status(500).send(`Hiba a konverzió során: ${error.message}`);
     }
 });
 
-// Start the server
+// A szerver indítása
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Szerver fut a ${PORT} porton`));
+
